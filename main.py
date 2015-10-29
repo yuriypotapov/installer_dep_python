@@ -6,7 +6,6 @@ call_setup = setup()
 
 
 class main(object):
-
     def __init__(self):
         if call_setup.is_linux_posix():
             call_setup._install_modules(it_imptnt=True)

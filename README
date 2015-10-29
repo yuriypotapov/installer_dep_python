@@ -1,0 +1,25 @@
+**About Installer for enapps openerp system.**
+-------------
+It's installer for system modules, packages that need for work openerp 6.1
+-----------------------------
+
+*For work this installer need OS Ubuntu.*
+
+For installer need install pip:
+    $ sudo apt-get install pip
+
+-----------------------------
+Default packages:
+'PyWebDAV', 'HTMLParser', 'ansi2html', 'erppeek', 'ftputil', 'fuzzywuzzy', 'vatnumber', 'xlrd', 'zbar', 'pyPdf', 'requests',
+ 'httplib2', 'python-dime','Werkzeug', 'GitPython', 'simple-crypt', 'psycopg2', 'simplejson', 'lxml', 'pytz', 'PyYaml', 'reportlab',
+ 'Mako', 'pychart', 'babel', 'mysql-python'
+
+Default modules:
+ 'build-essential','git','imagemagick','libzbar-dev','python-babel','python-dateutil','python-dev','python-docutils',
+ 'python-feedparser','python-gdata','python-git','python-jinja2','python-ldap','python-libxslt1','python-lxml','python-mako',
+ 'python-mock','python-mysqldb','python-oauth2','python-openid','python-pil','python-pip','python-psutil','python-psycopg2',
+ 'python-pybabel','python-pychart','python-pydot','python-pyparsing','python-reportlab','python-simplejson','python-tz','python-unittest2',
+ 'python-vatnumber','python-vobject','python-webdav','python-xlwt','python-yaml','python-zsi','zsh','software-properties-common',
+ 'sshpass','python-software-properties','libpq-dev','libxml2-dev','libmysqlclient-dev','lmfit','yaml'
+
+If need add more modules or packages go to dependents.py
