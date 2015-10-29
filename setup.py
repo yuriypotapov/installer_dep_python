@@ -14,6 +14,7 @@ class setup(object):
     curr_os = os.name
     curr_platform = platform.system()
     access_packages_install = True
+    error_modules = []
 
     def _get_all_modules(self):
         modules = dependents['sys_modules']
@@ -31,12 +32,9 @@ class setup(object):
         if os.geteuid() == 0:
             return True
 
-    def _install_modules(self, it_imptnt):
-        modules = self._get_all_modules()
-        cache = apt.cache.Cache()
-        update = cache.update
+    def run_install_module(self, cache, modules, it_imptnt):
         pkg = lambda module: cache[module]
-        error_modules = []
+
         if self.is_root():
             for module in modules:
                 try:
@@ -51,14 +49,21 @@ class setup(object):
                         except Exception, arg:
                             print Fore.RED + "ERROR, %s module failed install" % module
                             if it_imptnt:
-                                error_modules[module] = arg
+                                self.error_modules[module] = arg
                 except:
                     print Fore.RED + "Unable to locate package %s " % module
-            for module, message in error_modules:
+            for module, message in self.error_modules:
                 sys.stdout.write(Fore.RED + "Package %s not installed!\n" % module)
         else:
             sys.exit("Modules not installed. Permission denied: 'Must be root'")
-        if error_modules:
+
+    def _install_modules(self, it_imptnt):
+        modules = self._get_all_modules()
+        cache = apt.cache.Cache()
+        update = cache.update
+
+        self.run_install_module(cache=cache, modules=modules, it_imptnt=it_imptnt)
+        if self.error_modules:
             self.access_packages_install = False
         return True
 

@@ -19,11 +19,13 @@ class main(object):
     def get_options(self, option):
         """Return value from options, if option not set return False. If important_modules in config file not set return Fasle """
         config = ConfigParser.ConfigParser()
+        option_res = False
         try:
+            config.read('conf.cfg')
             option_res = config.get('options', option) if option else False
         except Exception, arg:
             print arg
-        return option_res or False
+        return option_res
 
 if __name__ == '__main__':
     main()
