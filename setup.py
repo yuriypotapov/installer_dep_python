@@ -6,12 +6,14 @@ import apt
 import platform
 from colorama import Fore
 import pip
+from Tkinter import *
 
 
 class setup(object):
 
     curr_os = os.name
     curr_platform = platform.system()
+    access_packages_install = True
 
     def _get_all_modules(self):
         modules = dependents['sys_modules']
@@ -21,7 +23,7 @@ class setup(object):
         packages = dependents['packages']
         return packages
 
-    def is_posix(self):
+    def is_linux_posix(self):
         if 'Linux' in self.curr_platform and 'posix' in self.curr_os:
             return True
 
@@ -29,12 +31,12 @@ class setup(object):
         if os.geteuid() == 0:
             return True
 
-    def _install_modules(self):
+    def _install_modules(self, it_imptnt=False):
         modules = self._get_all_modules()
         cache = apt.cache.Cache()
         update = cache.update
         pkg = lambda module: cache[module]
-
+        error_modules = []
         if self.is_root():
             for module in modules:
                 try:
@@ -48,11 +50,16 @@ class setup(object):
                             cache.commit()
                         except Exception, arg:
                             print Fore.RED + "ERROR, %s module failed install" % module
+                            if it_imptnt:
+                                error_modules[module] = arg
                 except:
                     print Fore.RED + "Unable to locate package %s " % module
+            for module, message in error_modules:
+                sys.stdout.write(Fore.RED + "Package %s not installed!\n" % module)
         else:
             sys.exit("Modules not installed. Permission denied: 'Must be root'")
-
+        if error_modules:
+            self.access_packages_install = False
         return True
 
     def run_install_packeges(self, packages=[]):
@@ -69,7 +76,7 @@ class setup(object):
         if hasattr(sys, 'real_prefix'):
             self.run_install_packeges(packages=packages)
         else:
-            qust = raw_input("Virtualenv did not activated!Would you like install packages to global?[Y/n]")
+            qust = raw_input("Virtualenv did not activated!Would you like install packages to global?[y/n]")
             if qust.lower() == 'y':
                 self.run_install_packeges(packages=packages)
             else:
