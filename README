@@ -1,5 +1,5 @@
 **About Installer for enapps openerp system.**
--------------
+-----------------------------
 It's installer for system modules, packages that need for work openerp 6.1
 -----------------------------
 
@@ -23,3 +23,6 @@ Default modules:
  'sshpass','python-software-properties','libpq-dev','libxml2-dev','libmysqlclient-dev','lmfit','yaml'
 
 If need add more modules or packages go to dependents.py
+-----------------------------
+*Use conf.cfg for set *
+

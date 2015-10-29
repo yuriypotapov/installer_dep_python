@@ -31,7 +31,7 @@ class setup(object):
         if os.geteuid() == 0:
             return True
 
-    def _install_modules(self, it_imptnt=False):
+    def _install_modules(self, it_imptnt):
         modules = self._get_all_modules()
         cache = apt.cache.Cache()
         update = cache.update
