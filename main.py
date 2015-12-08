@@ -2,12 +2,12 @@
 import ConfigParser
 import sys
 
-from setup import setup
+from setup import Setup
 
-call_setup = setup()
+call_setup = Setup()
 
 
-class main(object):
+class Main(object):
 
     def __init__(self):
         """Check is Ubuntu OS, run first module install, after run packages install """
@@ -39,5 +39,5 @@ class main(object):
         return option_res
 
 if __name__ == '__main__':
-    main()
+    Main()
 

@@ -5,10 +5,10 @@ import sys
 import platform
 from colorama import Fore
 import pip
-from Tkinter import *
 
 
-class setup(object):
+class Setup(object):
+
     curr_os = os.name
     curr_platform = platform.system()
     access_packages_install = True
